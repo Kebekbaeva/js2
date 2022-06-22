@@ -1,0 +1,27 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+
+
+.car  {
+	height: 100vh;
+	background: url(img/car.png) 100% center;
+	background-size: cover;
+}
+
+h1 {
+	height: 200px;
+	padding: 100px;
+	text-align: center;
+	color: rgb(212, 128, 25);
+}
+
+h2 {
+	text-align: center;
+	color: rgba(212, 128, 25, 1);
+	width: 200px; 
+	
+	
+}
