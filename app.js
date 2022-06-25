@@ -120,4 +120,52 @@ function openModalScroll() {
 window.addEventListener("scroll", openModalScroll);
 const modalTimeout = setTimeout(openModal, 5000);
 
+
+// forms
+
+	const forms = document.querySelectorAll("form");
+	const message = {
+		loading: "The download is progress",
+		success: "Thank you we will contact you soon!!!",
+		fail: "Something went wrong",
+	};
+
+	forms.forEach(item => {
+		postData(item);
+	});
+
+	function postData(form) {
+		form.addEventListener("submit", (e) => {
+			e.preventDefault();
+
+			const messageBlock = document.createElement("div");
+			messageBlock.textContent = message.loading;
+			form.append(messageBlock);
+
+			const request = new XMLHttpRequest();
+			request.open("POST", "server.php");
+			request.setRequestHeader("Content-type", "application/json");
+
+			const formData = new FormData(form);
+			const object = {};
+
+			formData.forEach((item, i) => {
+				object[i] = item;
+			});
+
+			const json = JSON.stringify(object);
+    	request.send(json);
+			request.addEventListener("load", () => {
+			if (request.status === 200) {
+				console.log(request.response);
+				messageBlock.textContent = message.success;
+			 } else {
+				messageBlock.textContent = message.fail;
+			 }	
+			  });
+		});
+	}
+
+
+
 	
